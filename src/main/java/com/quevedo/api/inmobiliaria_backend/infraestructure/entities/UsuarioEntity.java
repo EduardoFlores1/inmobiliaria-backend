@@ -1,7 +1,5 @@
 package com.quevedo.api.inmobiliaria_backend.infraestructure.entities;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -32,7 +30,6 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "Equipo_Venta", nullable = true)
     private int equipoVenta;
 
-    @JsonSerialize(using =  ToStringSerializer.class)
     @Column(name = "Fecha_Registro", nullable = false)
     private LocalDateTime fechaRegistro;
 

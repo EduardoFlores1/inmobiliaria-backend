@@ -39,4 +39,9 @@ public class ContratoRepositoryJpa implements IContratoRepository {
     public void delete(int id) {
         contratoRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public Optional<Contrato> buscarPorIdEmpleado(Integer idEmpleado) {
+        return contratoRepositoryJpa.buscarPorIdEmpleado(idEmpleado).map(ContratoMapper::fromEntity);
+    }
 }
