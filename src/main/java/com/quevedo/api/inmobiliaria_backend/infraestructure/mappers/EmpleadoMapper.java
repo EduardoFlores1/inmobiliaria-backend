@@ -50,7 +50,7 @@ public class EmpleadoMapper {
                 e.fechaContratacion().toString(),
                 e.cargo(),
                 e.estado(),
-                ContratoMapper.toResponse(c)
+                c == null ? null : ContratoMapper.toResponse(c) //provide of usuarioMapper
         );
     }
 
