@@ -27,30 +27,35 @@ public class EmpleadoCreateUseCase implements IEmpleadoCreateUseCase{
     @Transactional
     public EmpleadoDTO execute(EmpleadoCreateDTO data) {
         // create empleado
-        Empleado empleado = empleadoRepository.save(
-                new Empleado(
-                        data.getNombre(),
-                        data.getApellido(),
-                        data.getEmail(),
-                        data.getDNI(),
-                        data.getTelefono(),
-                        data.getDireccion(),
-                        LocalDateTime.parse(data.getFechaContratacion()),
-                        data.getCargo(),
-                        data.isEstado()
-                )
-        );
+        try {
+            Empleado empleado = empleadoRepository.save(
+                    new Empleado(
+                            data.getNombre(),
+                            data.getApellido(),
+                            data.getEmail(),
+                            data.getDNI(),
+                            data.getTelefono(),
+                            data.getDireccion(),
+                            LocalDateTime.parse(data.getFechaContratacion()),
+                            data.getCargo(),
+                            data.isEstado()
+                    )
+            );
 
-        // anex create contrato
-        Contrato contrato = contratoRepository.save(
-                new Contrato(
-                        LocalDateTime.parse(data.getContratoCreateDTO().getFechaInicio()),
-                        LocalDateTime.parse(data.getContratoCreateDTO().getFechaFin()),
-                        data.getContratoCreateDTO().getTipoContrato(),
-                        empleado
-                )
-        );
+            // anex create contrato
+            Contrato contrato = contratoRepository.save(
+                    new Contrato(
+                            LocalDateTime.parse(data.getContratoCreateDTO().getFechaInicio()),
+                            LocalDateTime.parse(data.getContratoCreateDTO().getFechaFin()),
+                            data.getContratoCreateDTO().getTipoContrato(),
+                            empleado
+                    )
+            );
 
-        return EmpleadoMapper.toResponse(empleado, contrato);
+            return EmpleadoMapper.toResponse(empleado, contrato);
+
+        }catch (Exception e){
+            throw new RuntimeException("Error al crear empleado", e);
+        }
     }
 }

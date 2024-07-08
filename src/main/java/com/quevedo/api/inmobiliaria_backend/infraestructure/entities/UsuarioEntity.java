@@ -18,7 +18,7 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "Id_Usuario")
     private Integer idUsuario;
 
-    @Column(name = "Username", nullable = false)
+    @Column(name = "Username", unique = true, nullable = false)
     private String username;
 
     @Column(name = "Password", nullable = false)
@@ -36,7 +36,7 @@ public class UsuarioEntity implements Serializable {
     @Column(name = "Estado", nullable = false)
     private boolean estado;
 
-    @OneToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "Id_Empleado", nullable = false, foreignKey = @ForeignKey(name = "fk_usuario_empleado"))
     private EmpleadoEntity empleado;
 

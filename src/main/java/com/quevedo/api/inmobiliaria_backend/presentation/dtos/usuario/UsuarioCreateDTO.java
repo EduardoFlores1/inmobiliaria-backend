@@ -9,18 +9,18 @@ public class UsuarioCreateDTO {
     int equipoVenta;
     String fechaRegistro;
     boolean estado;
-    EmpleadoDTO empleadodto;
+    EmpleadoDTO empleadoDTO;
 
     // cosntructor
 
-    public UsuarioCreateDTO(String username, String password, String rol, int equipoVenta, String fechaRegistro, boolean estado, EmpleadoDTO empleadodto) {
+    public UsuarioCreateDTO(String username, String password, String rol, int equipoVenta, String fechaRegistro, boolean estado, EmpleadoDTO empleadoDTO) {
         this.username = username;
         this.password = password;
         this.rol = rol;
         this.equipoVenta = equipoVenta;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.empleadodto = empleadodto;
+        this.empleadoDTO = empleadoDTO;
     }
 
     // getters and setters
@@ -73,11 +73,11 @@ public class UsuarioCreateDTO {
         this.estado = estado;
     }
 
-    public EmpleadoDTO getEmpleadodto() {
-        return empleadodto;
+    public EmpleadoDTO getEmpleadoDTO() {
+        return empleadoDTO;
     }
 
-    public void setEmpleadodto(EmpleadoDTO empleadodto) {
-        this.empleadodto = empleadodto;
+    public void setEmpleadoDTO(EmpleadoDTO empleadoDTO) {
+        this.empleadoDTO = empleadoDTO;
     }
 }

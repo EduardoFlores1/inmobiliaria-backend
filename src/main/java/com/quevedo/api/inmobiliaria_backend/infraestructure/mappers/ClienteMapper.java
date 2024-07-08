@@ -25,30 +25,30 @@ public class ClienteMapper {
 
     public static ClienteEntity toEntity(Cliente cliente) {
         return new ClienteEntity(
-                cliente.idCliente(),
-                cliente.nombre(),
-                cliente.apellido(),
-                cliente.DNI(),
-                cliente.telefono(),
-                cliente.email(),
-                cliente.fechaRegistro(),
-                cliente.tipoEstado(),
-                cliente.estado(),
-                UsuarioMapper.toEntity(cliente.usuario())
+                cliente.getIdCliente(),
+                cliente.getNombre(),
+                cliente.getApellido(),
+                cliente.getDNI(),
+                cliente.getTelefono(),
+                cliente.getEmail(),
+                cliente.getFechaRegistro(),
+                cliente.getTipoEstado(),
+                cliente.isEstado(),
+                UsuarioMapper.toEntity(cliente.getUsuario())
         );
     }
 
     public static ClienteDTO toResponse(Cliente cliente) {
         return new ClienteDTO(
-                cliente.idCliente(),
-                cliente.nombre(),
-                cliente.apellido(),
-                cliente.DNI(),
-                cliente.telefono(),
-                cliente.email(),
-                cliente.fechaRegistro().toString(),
-                cliente.tipoEstado(),
-                cliente.estado()
+                cliente.getIdCliente(),
+                cliente.getNombre(),
+                cliente.getApellido(),
+                cliente.getDNI(),
+                cliente.getTelefono(),
+                cliente.getEmail(),
+                cliente.getFechaRegistro().toString(),
+                cliente.getTipoEstado(),
+                cliente.isEstado()
         );
     }
 

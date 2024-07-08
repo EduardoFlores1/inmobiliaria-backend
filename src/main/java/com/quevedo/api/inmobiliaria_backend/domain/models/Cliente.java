@@ -2,19 +2,125 @@ package com.quevedo.api.inmobiliaria_backend.domain.models;
 
 import java.time.LocalDateTime;
 
-public record Cliente(
-        Integer idCliente,
-        String nombre,
-        String apellido,
-        String DNI,
-        String telefono,
-        String email,
-        LocalDateTime fechaRegistro,
-        String tipoEstado,
-        boolean estado,
-        Usuario usuario
-) {
+public class Cliente{
+    private Integer idCliente;
+    private String nombre;
+    private String apellido;
+    private String DNI;
+    private String telefono;
+    private String email;
+    private LocalDateTime fechaRegistro;
+    private String tipoEstado;
+    private boolean estado;
+    private Usuario usuario;
+
+    // constructores
+    public Cliente() {}
+
+    public Cliente(Integer idCliente, String nombre, String apellido, String DNI, String telefono, String email, LocalDateTime fechaRegistro, String tipoEstado, boolean estado, Usuario usuario) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.DNI = DNI;
+        this.telefono = telefono;
+        this.email = email;
+        this.fechaRegistro = fechaRegistro;
+        this.tipoEstado = tipoEstado;
+        this.estado = estado;
+        this.usuario = usuario;
+    }
+
     public Cliente(String nombre, String apellido, String DNI, String telefono, String email, LocalDateTime fechaRegistro, String tipoEstado, boolean estado, Usuario usuario) {
-        this(null, nombre, apellido, DNI, telefono, email, fechaRegistro, tipoEstado, estado, usuario);
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.DNI = DNI;
+        this.telefono = telefono;
+        this.email = email;
+        this.fechaRegistro = fechaRegistro;
+        this.tipoEstado = tipoEstado;
+        this.estado = estado;
+        this.usuario = usuario;
+    }
+
+    // getters and setters
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getTipoEstado() {
+        return tipoEstado;
+    }
+
+    public void setTipoEstado(String tipoEstado) {
+        this.tipoEstado = tipoEstado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

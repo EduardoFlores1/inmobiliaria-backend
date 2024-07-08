@@ -27,10 +27,10 @@ public class EmpleadoReadByIdUseCase implements IEmpleadoReadByIdUseCase {
         Optional<Empleado> opt = empleadoRepository.readById(id);
         if (opt.isPresent()) {
             // get contrato
-            Contrato contrato = contratoRepository.buscarPorIdEmpleado(id).orElse(null);
+            Optional<Contrato> optContrato = contratoRepository.buscarPorIdEmpleado(id);
 
             // build empleadoDTO
-            return EmpleadoMapper.toResponse(opt.get(), contrato);
+            return EmpleadoMapper.toResponse(opt.get(), optContrato.orElse(null));
         }
 
         throw new RuntimeException("El id del empleado no existe");

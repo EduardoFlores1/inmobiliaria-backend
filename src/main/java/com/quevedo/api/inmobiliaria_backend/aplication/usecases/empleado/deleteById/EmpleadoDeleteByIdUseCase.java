@@ -1,9 +1,9 @@
 package com.quevedo.api.inmobiliaria_backend.aplication.usecases.empleado.deleteById;
 
-import com.quevedo.api.inmobiliaria_backend.domain.models.Contrato;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Empleado;
-import com.quevedo.api.inmobiliaria_backend.domain.repositories.IContratoRepository;
+import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IEmpleadoRepository;
+import com.quevedo.api.inmobiliaria_backend.domain.repositories.IUsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,29 +13,35 @@ import java.util.Optional;
 public class EmpleadoDeleteByIdUseCase implements IEmpleadoDeleteByIdUseCase {
 
     private final IEmpleadoRepository empleadoRepository;
-    private final IContratoRepository contratoRepository;
+    private final IUsuarioRepository usuarioRepository;
 
-    public EmpleadoDeleteByIdUseCase(IEmpleadoRepository empleadoRepository, IContratoRepository contratoRepository) {
+    public EmpleadoDeleteByIdUseCase(IEmpleadoRepository empleadoRepository, IUsuarioRepository usuarioRepository) {
         this.empleadoRepository = empleadoRepository;
-        this.contratoRepository = contratoRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     @Transactional
     public void execute(int id) {
         // if empleado exist
-        Optional<Empleado> opt = empleadoRepository.readById(id);
-        if (opt.isPresent()) {
-            // get contrato
-            Contrato contrato = contratoRepository.buscarPorIdEmpleado(id).orElse(null);
+        Optional<Empleado> optEmpleado = empleadoRepository.readById(id);
+        if (optEmpleado.isPresent()) {
+            // if empleado has usuario
+            Optional<Usuario> optUsuario = usuarioRepository.buscarUsuarioEstadoTrue(id);
 
-            // if contrato exist
-            if(contrato != null) {
-                contratoRepository.delete(contrato.idContrato());
+            // logic delete
+            try {
+                optUsuario.ifPresent(usuario -> {
+                    usuario.setEstado(false);
+                    usuarioRepository.save(usuario);
+                });
+                // logic delete empleado
+                optEmpleado.get().setEstado(false);
+                empleadoRepository.save(optEmpleado.get());
+
+            }catch (Exception e) {
+                throw new RuntimeException("Error al eliminar el empleado", e);
             }
-
-            // delete empleado
-            empleadoRepository.delete(id);
         } else {
             throw new RuntimeException("No Eliminación, El id del empleado no existe");
         }

@@ -22,27 +22,27 @@ public class UsuarioMapper {
 
     public static UsuarioEntity toEntity(Usuario usuario) {
         return new UsuarioEntity(
-                usuario.idUsuario(),
-                usuario.username(),
-                usuario.password(),
-                usuario.rol(),
-                usuario.equipoVenta(),
-                usuario.fechaRegistro(),
-                usuario.estado(),
-                EmpleadoMapper.toEntity(usuario.empleado())
+                usuario.getIdUsuario(),
+                usuario.getUsername(),
+                usuario.getPassword(),
+                usuario.getRol(),
+                usuario.getEquipoVenta(),
+                usuario.getFechaRegistro(),
+                usuario.isEstado(),
+                EmpleadoMapper.toEntity(usuario.getEmpleado())
         );
     }
 
     public static UsuarioDTO toResponse(Usuario usuario) {
         return new UsuarioDTO(
-                usuario.idUsuario(),
-                usuario.username(),
-                usuario.password(),
-                usuario.rol(),
-                usuario.equipoVenta(),
-                usuario.fechaRegistro().toString(),
-                usuario.estado(),
-                EmpleadoMapper.toResponse(usuario.empleado(), null) //controlado en EmpleadoMapper
+                usuario.getIdUsuario(),
+                usuario.getUsername(),
+                usuario.getPassword(),
+                usuario.getRol(),
+                usuario.getEquipoVenta(),
+                usuario.getFechaRegistro().toString(),
+                usuario.isEstado(),
+                EmpleadoMapper.toResponse(usuario.getEmpleado(), null) //controlado en EmpleadoMapper
         );
     }
 

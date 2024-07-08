@@ -20,20 +20,20 @@ public class ContratoMapper {
 
     public static ContratoEntity toEntity(Contrato contrato){
         return new ContratoEntity(
-                contrato.idContrato(),
-                contrato.fechaInicio(),
-                contrato.fechaFin(),
-                contrato.tipoContrato(),
-                EmpleadoMapper.toEntity(contrato.empleado())
+                contrato.getIdContrato(),
+                contrato.getFechaInicio(),
+                contrato.getFechaFin(),
+                contrato.getTipoContrato(),
+                EmpleadoMapper.toEntity(contrato.getEmpleado())
         );
     }
 
     public static ContratoDTO toResponse(Contrato contrato) {
         return new ContratoDTO(
-                contrato.idContrato(),
-                contrato.fechaInicio().toString(),
-                contrato.fechaFin().toString(),
-                contrato.tipoContrato()
+                contrato.getIdContrato(),
+                contrato.getFechaInicio().toString(),
+                contrato.getFechaFin().toString(),
+                contrato.getTipoContrato()
         );
     }
 

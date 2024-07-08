@@ -30,22 +30,20 @@ public class EmpleadoUpdateUseCase implements IEmpleadoUpdateUseCase{
         Optional<Empleado> opt = empleadoRepository.readById(idEmpleado);
         if (opt.isPresent()) {
             // update Empleado
-            Empleado empleadoUpdate = empleadoRepository
-                    .save(EmpleadoMapper.fromDtoToEmpleado(empleadoDTO));
+            try {
+                empleadoDTO.setIdEmpleado(idEmpleado);
+                Empleado empleadoUpdate = empleadoRepository
+                        .save(EmpleadoMapper.fromDtoToEmpleado(empleadoDTO));
 
-            if (empleadoUpdate == null) {
-                throw new RuntimeException("Error al actualizar empleado");
+                // update contrato
+                Contrato contratoUpdate = contratoRepository
+                        .save(ContratoMapper.fromDtoToContrato(empleadoUpdate, empleadoDTO.getContratoDTO()));
+
+                return EmpleadoMapper.toResponse(empleadoUpdate, contratoUpdate);
+
+            }catch (Exception e) {
+                throw new RuntimeException("Error al actualizar el empleado", e);
             }
-
-            // update contrato
-            Contrato contratoUpdate = contratoRepository
-                    .save(ContratoMapper.fromDtoToContrato(empleadoUpdate, empleadoDTO.getContratoDTO()));
-
-            if (contratoUpdate == null) {
-                throw new RuntimeException("Error al actualizar contrato");
-            }
-
-            return EmpleadoMapper.toResponse(empleadoUpdate, contratoUpdate);
         }
 
         throw new RuntimeException("El id del empleado no existe");

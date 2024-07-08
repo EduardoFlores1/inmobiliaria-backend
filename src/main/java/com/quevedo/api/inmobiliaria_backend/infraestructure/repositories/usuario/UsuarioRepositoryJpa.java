@@ -39,4 +39,10 @@ public class UsuarioRepositoryJpa implements IUsuarioRepository {
     public void delete(int id) {
         usuarioRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public Optional<Usuario> buscarUsuarioEstadoTrue(int idEmpleado) {
+        return usuarioRepositoryJpa.buscarUsuarioEstadoTrue(idEmpleado)
+                .map(UsuarioMapper::fromEntity);
+    }
 }

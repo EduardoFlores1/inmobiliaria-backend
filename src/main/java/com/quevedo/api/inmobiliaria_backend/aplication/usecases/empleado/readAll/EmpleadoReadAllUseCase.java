@@ -28,7 +28,7 @@ public class EmpleadoReadAllUseCase implements IEmpleadoReadAllUseCase{
         return empleados.stream()
                 .map(empleado -> {
                     return EmpleadoMapper.toResponse(empleado, contratoRepository.
-                            buscarPorIdEmpleado(empleado.idEmpleado()).orElse(null));
+                            buscarPorIdEmpleado(empleado.getIdEmpleado()).orElse(null));
                 }).toList();
     }
 }

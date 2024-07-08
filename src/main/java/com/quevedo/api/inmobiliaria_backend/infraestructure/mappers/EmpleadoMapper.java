@@ -25,31 +25,31 @@ public class EmpleadoMapper {
 
     public static EmpleadoEntity toEntity(Empleado empleado) {
         return new EmpleadoEntity(
-                empleado.idEmpleado(),
-                empleado.nombre(),
-                empleado.apellido(),
-                empleado.email(),
-                empleado.DNI(),
-                empleado.telefono(),
-                empleado.direccion(),
-                empleado.fechaContratacion(),
-                empleado.cargo(),
-                empleado.estado()
+                empleado.getIdEmpleado(),
+                empleado.getNombre(),
+                empleado.getApellido(),
+                empleado.getEmail(),
+                empleado.getDNI(),
+                empleado.getTelefono(),
+                empleado.getDireccion(),
+                empleado.getFechaContratacion(),
+                empleado.getCargo(),
+                empleado.isEstado()
         );
     }
 
     public static EmpleadoDTO toResponse(Empleado e, Contrato c) {
         return new EmpleadoDTO(
-                e.idEmpleado(),
-                e.nombre(),
-                e.apellido(),
-                e.email(),
-                e.DNI(),
-                e.telefono(),
-                e.direccion(),
-                e.fechaContratacion().toString(),
-                e.cargo(),
-                e.estado(),
+                e.getIdEmpleado(),
+                e.getNombre(),
+                e.getApellido(),
+                e.getEmail(),
+                e.getDNI(),
+                e.getTelefono(),
+                e.getDireccion(),
+                e.getFechaContratacion().toString(),
+                e.getCargo(),
+                e.isEstado(),
                 c == null ? null : ContratoMapper.toResponse(c) //provide of usuarioMapper
         );
     }
