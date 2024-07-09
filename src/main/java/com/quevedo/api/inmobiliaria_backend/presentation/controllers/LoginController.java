@@ -1,9 +1,11 @@
 package com.quevedo.api.inmobiliaria_backend.presentation.controllers;
 
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.login.ILoginUseCase;
+import com.quevedo.api.inmobiliaria_backend.presentation.dtos.generic.ResponseDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.login.LoginRequestDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.login.LoginResponseDTO;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO loginRequestDTO) {
-        return ResponseEntity.ok(loginUseCase.execute(loginRequestDTO));
+    public ResponseEntity<ResponseDTO<LoginResponseDTO>> login(@RequestBody @Valid LoginRequestDTO loginRequestDTO) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, loginUseCase.execute(loginRequestDTO)));
     }
 }

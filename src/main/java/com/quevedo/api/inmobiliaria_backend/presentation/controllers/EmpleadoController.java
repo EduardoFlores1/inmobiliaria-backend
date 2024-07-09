@@ -7,6 +7,7 @@ import com.quevedo.api.inmobiliaria_backend.aplication.usecases.empleado.readByI
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.empleado.update.IEmpleadoUpdateUseCase;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoCreateDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoDTO;
+import com.quevedo.api.inmobiliaria_backend.presentation.dtos.generic.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,28 +34,28 @@ public class EmpleadoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EmpleadoDTO>> readAll() {
-        return ResponseEntity.ok(empleadoReadAllUseCase.execute());
+    public ResponseEntity<ResponseDTO<List<EmpleadoDTO>>> readAll() {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, empleadoReadAllUseCase.execute()));
     }
 
     @GetMapping(value = "/{idEmpleado}")
-    public ResponseEntity<EmpleadoDTO> readById(@PathVariable int idEmpleado) {
-        return ResponseEntity.ok(empleadoReadByIdUseCase.execute(idEmpleado));
+    public ResponseEntity<ResponseDTO<EmpleadoDTO>> readById(@PathVariable int idEmpleado) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, empleadoReadByIdUseCase.execute(idEmpleado)));
     }
 
     @PostMapping
-    public ResponseEntity<EmpleadoDTO> create(@RequestBody EmpleadoCreateDTO empleadoCreateDTO) {
-        return new ResponseEntity<>(empleadoCreateUseCase.execute(empleadoCreateDTO), HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO<EmpleadoDTO>> create(@RequestBody EmpleadoCreateDTO empleadoCreateDTO) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.CREATED, empleadoCreateUseCase.execute(empleadoCreateDTO)));
     }
 
     @PutMapping(value = "/{idEmpleado}")
-    public ResponseEntity<EmpleadoDTO> create(@PathVariable int idEmpleado, @RequestBody EmpleadoDTO empleadoDTO) {
-        return ResponseEntity.ok(empleadoUpdateUseCase.execute(idEmpleado, empleadoDTO));
+    public ResponseEntity<ResponseDTO<EmpleadoDTO>> update(@PathVariable int idEmpleado, @RequestBody EmpleadoDTO empleadoDTO) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, empleadoUpdateUseCase.execute(idEmpleado, empleadoDTO)));
     }
 
     @DeleteMapping(value = "/{idEmpleado}")
-    public ResponseEntity<Void> delete(@PathVariable int idEmpleado) {
+    public ResponseEntity<ResponseDTO<Void>> delete(@PathVariable int idEmpleado) {
         empleadoDeleteByIdUseCase.execute(idEmpleado);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.NO_CONTENT));
     }
 }

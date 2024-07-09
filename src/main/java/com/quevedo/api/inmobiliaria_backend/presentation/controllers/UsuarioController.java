@@ -5,6 +5,7 @@ import com.quevedo.api.inmobiliaria_backend.aplication.usecases.usuario.deleteBy
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.usuario.readAll.IUsuarioReadAllUseCase;
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.usuario.readById.IUsuarioReadByIdUseCase;
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.usuario.update.IUsuarioUpdateUseCase;
+import com.quevedo.api.inmobiliaria_backend.presentation.dtos.generic.ResponseDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioCreateDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioDTO;
 import org.springframework.http.HttpStatus;
@@ -38,23 +39,23 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/{idUsuario}")
-    public ResponseEntity<UsuarioDTO> readById(@PathVariable int idUsuario) {
-        return ResponseEntity.ok(usuarioReadByIdUseCase.execute(idUsuario));
+    public ResponseEntity<ResponseDTO<UsuarioDTO>> readById(@PathVariable int idUsuario) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, usuarioReadByIdUseCase.execute(idUsuario)));
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioCreateDTO usuarioCreateDTO) {
-        return new ResponseEntity<>(usuarioCreateUseCase.execute(usuarioCreateDTO), HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO<UsuarioDTO>> create(@RequestBody UsuarioCreateDTO usuarioCreateDTO) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.CREATED, usuarioCreateUseCase.execute(usuarioCreateDTO)));
     }
 
     @PutMapping(value = "/{idUsuario}")
-    public ResponseEntity<UsuarioDTO> create(@PathVariable int idUsuario, @RequestBody UsuarioDTO usuarioDTO) {
-        return ResponseEntity.ok(usuarioUpdateUseCase.execute(idUsuario, usuarioDTO));
+    public ResponseEntity<ResponseDTO<UsuarioDTO>> update(@PathVariable int idUsuario, @RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, usuarioUpdateUseCase.execute(idUsuario, usuarioDTO)));
     }
 
     @DeleteMapping(value = "/{idUsuario}")
-    public ResponseEntity<Void> delete(@PathVariable int idUsuario) {
+    public ResponseEntity<ResponseDTO<Void>> delete(@PathVariable int idUsuario) {
         usuarioDeleteByIdUseCase.execute(idUsuario);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.NO_CONTENT));
     }
 }
