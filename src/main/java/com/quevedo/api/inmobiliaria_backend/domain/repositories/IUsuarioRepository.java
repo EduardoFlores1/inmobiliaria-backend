@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface IUsuarioRepository extends ICommonRepository<Usuario>{
     Optional<Usuario> buscarUsuarioEstadoTrue(int idEmpleado);
+    Optional<Usuario> findByUsername(String username);
 }

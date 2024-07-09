@@ -24,7 +24,7 @@ public class ClienteEntity implements Serializable {
     @Column(name = "Apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "DNI", nullable = false)
+    @Column(name = "DNI", unique = true, nullable = false)
     private String DNI;
 
     @Column(name = "Telefono", nullable = false)

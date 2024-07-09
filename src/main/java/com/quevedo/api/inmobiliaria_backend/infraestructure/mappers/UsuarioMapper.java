@@ -3,6 +3,7 @@ package com.quevedo.api.inmobiliaria_backend.infraestructure.mappers;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.entities.UsuarioEntity;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioDTO;
+import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioUserDetailsDTO;
 
 import java.time.LocalDateTime;
 
@@ -56,6 +57,18 @@ public class UsuarioMapper {
                 LocalDateTime.parse(dto.getFechaRegistro()),
                 dto.isEstado(),
                 EmpleadoMapper.fromDtoToEmpleado(dto.getEmpleadoDTO())
+        );
+    }
+
+    public static UsuarioUserDetailsDTO toUserDetails(Usuario usuario) {
+        return new UsuarioUserDetailsDTO(
+                usuario.getIdUsuario(),
+                usuario.getUsername(),
+                usuario.getPassword(),
+                usuario.getRol(),
+                usuario.getEquipoVenta(),
+                usuario.getFechaRegistro(),
+                usuario.isEstado()
         );
     }
 }

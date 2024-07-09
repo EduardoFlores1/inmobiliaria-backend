@@ -5,6 +5,7 @@ import com.quevedo.api.inmobiliaria_backend.domain.repositories.IUsuarioReposito
 import com.quevedo.api.inmobiliaria_backend.infraestructure.entities.UsuarioEntity;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.UsuarioMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,13 @@ public class UsuarioRepositoryJpa implements IUsuarioRepository {
     @Override
     public Optional<Usuario> buscarUsuarioEstadoTrue(int idEmpleado) {
         return usuarioRepositoryJpa.buscarUsuarioEstadoTrue(idEmpleado)
+                .map(UsuarioMapper::fromEntity);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Usuario> findByUsername(String username) {
+        return usuarioRepositoryJpa.findByUsername(username)
                 .map(UsuarioMapper::fromEntity);
     }
 }
