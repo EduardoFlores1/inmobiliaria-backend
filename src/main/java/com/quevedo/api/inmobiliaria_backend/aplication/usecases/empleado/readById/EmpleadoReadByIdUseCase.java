@@ -6,7 +6,9 @@ import com.quevedo.api.inmobiliaria_backend.domain.repositories.IContratoReposit
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IEmpleadoRepository;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.EmpleadoMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,6 +24,7 @@ public class EmpleadoReadByIdUseCase implements IEmpleadoReadByIdUseCase {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EmpleadoDTO execute(int id) {
         // if empleado exist
         Optional<Empleado> opt = empleadoRepository.readById(id);
@@ -33,6 +36,6 @@ public class EmpleadoReadByIdUseCase implements IEmpleadoReadByIdUseCase {
             return EmpleadoMapper.toResponse(opt.get(), optContrato.orElse(null));
         }
 
-        throw new RuntimeException("El id del empleado no existe");
+        throw new EntityNotFoundException();
     }
 }

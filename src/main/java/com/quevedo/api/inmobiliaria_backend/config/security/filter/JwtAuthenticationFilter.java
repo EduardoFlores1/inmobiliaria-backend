@@ -3,7 +3,6 @@ package com.quevedo.api.inmobiliaria_backend.config.security.filter;
 import com.quevedo.api.inmobiliaria_backend.aplication.services.auth.IJwtService;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IUsuarioRepository;
-import com.quevedo.api.inmobiliaria_backend.helpers.PasswordHasher;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.UsuarioMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioUserDetailsDTO;
 import jakarta.servlet.FilterChain;
@@ -12,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 

@@ -5,7 +5,6 @@ import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoD
 public class UsuarioDTO {
     Integer idUsuario;
     String username;
-    String password;
     String rol;
     int equipoVenta;
     String fechaRegistro;
@@ -13,11 +12,9 @@ public class UsuarioDTO {
     EmpleadoDTO empleadoDTO;
 
     // constructor
-
-    public UsuarioDTO(Integer idUsuario, String username, String password, String rol, int equipoVenta, String fechaRegistro, boolean estado, EmpleadoDTO empleadoDTO) {
+    public UsuarioDTO(Integer idUsuario, String username, String rol, int equipoVenta, String fechaRegistro, boolean estado, EmpleadoDTO empleadoDTO) {
         this.idUsuario = idUsuario;
         this.username = username;
-        this.password = password;
         this.rol = rol;
         this.equipoVenta = equipoVenta;
         this.fechaRegistro = fechaRegistro;
@@ -41,14 +38,6 @@ public class UsuarioDTO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRol() {

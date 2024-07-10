@@ -4,6 +4,7 @@ import com.quevedo.api.inmobiliaria_backend.domain.models.Empleado;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IEmpleadoRepository;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IUsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,21 +31,15 @@ public class EmpleadoDeleteByIdUseCase implements IEmpleadoDeleteByIdUseCase {
             Optional<Usuario> optUsuario = usuarioRepository.buscarUsuarioEstadoTrue(id);
 
             // logic delete
-            try {
-                optUsuario.ifPresent(usuario -> {
-                    usuario.setEstado(false);
-                    usuarioRepository.save(usuario);
-                });
-                // logic delete empleado
-                optEmpleado.get().setEstado(false);
-                empleadoRepository.save(optEmpleado.get());
+            optUsuario.ifPresent(usuario -> {
+                usuario.setEstado(false);
+                usuarioRepository.save(usuario);
+            });
+            // logic delete empleado
+            optEmpleado.get().setEstado(false);
+            empleadoRepository.save(optEmpleado.get());
 
-            }catch (Exception e) {
-                throw new RuntimeException("Error al eliminar el empleado", e);
-            }
-        } else {
-            throw new RuntimeException("No Eliminación, El id del empleado no existe");
         }
-
+        throw new EntityNotFoundException();
     }
 }

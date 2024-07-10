@@ -4,6 +4,7 @@ import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IUsuarioRepository;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.UsuarioMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,8 @@ public class UsuarioReadByIdUseCase implements IUsuarioReadByIdUseCase{
         if(opt.isPresent()) {
             //  empleadoDTO
             return UsuarioMapper.toResponse(opt.get());
-        }
 
-        throw  new RuntimeException("El id del usuario no existe");
+        }
+        throw  new EntityNotFoundException();
     }
 }

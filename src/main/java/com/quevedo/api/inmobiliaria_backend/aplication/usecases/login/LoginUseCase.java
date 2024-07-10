@@ -7,6 +7,7 @@ import com.quevedo.api.inmobiliaria_backend.presentation.dtos.login.LoginRequest
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.login.LoginResponseDTO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +34,7 @@ public class LoginUseCase implements ILoginUseCase{
         authenticationManager.authenticate(authenticationToken);
 
         Usuario usuario = usuarioRepository.findByUsername(loginRequestDTO.getUsername())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("Username no econtrado"));
 
         String jwt = jwtService.generateToken(usuario);
 

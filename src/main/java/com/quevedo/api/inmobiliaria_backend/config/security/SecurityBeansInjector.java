@@ -47,7 +47,7 @@ public class SecurityBeansInjector {
     public UserDetailsService userDetailsService() {
         return username -> UsuarioMapper.toUserDetails(
                 usuarioRepository.findByUsername(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado por username"))
+                        .orElseThrow(() -> new UsernameNotFoundException("Username no encontrado"))
         );
     }
 }

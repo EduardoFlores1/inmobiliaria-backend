@@ -7,6 +7,7 @@ import com.quevedo.api.inmobiliaria_backend.domain.repositories.IEmpleadoReposit
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.ContratoMapper;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.EmpleadoMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,6 @@ public class EmpleadoUpdateUseCase implements IEmpleadoUpdateUseCase{
         Optional<Empleado> opt = empleadoRepository.readById(idEmpleado);
         if (opt.isPresent()) {
             // update Empleado
-            try {
                 empleadoDTO.setIdEmpleado(idEmpleado);
                 Empleado empleadoUpdate = empleadoRepository
                         .save(EmpleadoMapper.fromDtoToEmpleado(empleadoDTO));
@@ -41,11 +41,7 @@ public class EmpleadoUpdateUseCase implements IEmpleadoUpdateUseCase{
 
                 return EmpleadoMapper.toResponse(empleadoUpdate, contratoUpdate);
 
-            }catch (Exception e) {
-                throw new RuntimeException("Error al actualizar el empleado", e);
-            }
         }
-
-        throw new RuntimeException("El id del empleado no existe");
+        throw new EntityNotFoundException();
     }
 }

@@ -4,13 +4,14 @@ import com.quevedo.api.inmobiliaria_backend.domain.models.Cliente;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IClienteRepository;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.ClienteMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.cliente.ClienteDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
-public class ClienteUpdateUseCase implements IClienteUpdateUseCase{
+public class ClienteUpdateUseCase implements IClienteUpdateUseCase {
 
     private final IClienteRepository clienteRepository;
 
@@ -25,18 +26,12 @@ public class ClienteUpdateUseCase implements IClienteUpdateUseCase{
         Optional<Cliente> opt = clienteRepository.readById(idCliente);
         if (opt.isPresent()) {
             clienteDTO.setIdCliente(idCliente);
-            try {
-                Cliente clienteUpdate = clienteRepository.save(
-                        ClienteMapper.fromDtoToCliente(clienteDTO, opt.get().getUsuario())
-                );
-                return ClienteMapper.toResponse(clienteUpdate);
+            Cliente clienteUpdate = clienteRepository.save(
+                    ClienteMapper.fromDtoToCliente(clienteDTO, opt.get().getUsuario())
+            );
+            return ClienteMapper.toResponse(clienteUpdate);
 
-            }catch (Exception e) {
-                throw new RuntimeException("Error al actualizar cliente", e);
-            }
-
-        }else {
-            throw new RuntimeException("El id de cliente no existe");
         }
+        throw new EntityNotFoundException();
     }
 }

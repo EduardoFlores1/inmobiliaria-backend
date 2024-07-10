@@ -20,6 +20,7 @@ public class UsuarioReadAllUseCase implements IUsuarioReadAllUseCase{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UsuarioDTO> execute() {
         // list all usuarios
         List<Usuario> list = usuarioRepository.readAll();

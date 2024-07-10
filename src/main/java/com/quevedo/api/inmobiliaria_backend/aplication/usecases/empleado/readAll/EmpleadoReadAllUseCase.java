@@ -6,6 +6,7 @@ import com.quevedo.api.inmobiliaria_backend.domain.repositories.IEmpleadoReposit
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.EmpleadoMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,14 +22,13 @@ public class EmpleadoReadAllUseCase implements IEmpleadoReadAllUseCase{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EmpleadoDTO> execute() {
         // list all empleados
         List<Empleado> empleados = empleadoRepository.readAll();
         // find contratos by idEmpleado and return List<EmpleadoDTO>
         return empleados.stream()
-                .map(empleado -> {
-                    return EmpleadoMapper.toResponse(empleado, contratoRepository.
-                            buscarPorIdEmpleado(empleado.getIdEmpleado()).orElse(null));
-                }).toList();
+                .map(empleado -> EmpleadoMapper.toResponse(empleado, contratoRepository.
+                        buscarPorIdEmpleado(empleado.getIdEmpleado()).orElse(null))).toList();
     }
 }

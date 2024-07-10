@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @Service
-public class ClienteCreateUseCase implements IClienteCreateUseCase{
+public class ClienteCreateUseCase implements IClienteCreateUseCase {
 
     private final IClienteRepository clienteRepository;
 
@@ -23,25 +23,19 @@ public class ClienteCreateUseCase implements IClienteCreateUseCase{
     @Transactional
     public ClienteDTO execute(ClienteCreateDTO data) {
         // create cliente
-        try {
-            Cliente cliente = clienteRepository.save(
-                    new Cliente(
-                            data.getNombre(),
-                            data.getApellido(),
-                            data.getDNI(),
-                            data.getTelefono(),
-                            data.getEmail(),
-                            LocalDateTime.parse(data.getFechaRegistro()),
-                            data.getTipoEstado(),
-                            data.isEstado(),
-                            data.getUsuario()
-                    )
-            );
-
-            return ClienteMapper.toResponse(cliente);
-
-        }catch (Exception e){
-            throw new RuntimeException("Error al crear el cliente", e);
-        }
+        Cliente cliente = clienteRepository.save(
+                new Cliente(
+                        data.getNombre(),
+                        data.getApellido(),
+                        data.getDNI(),
+                        data.getTelefono(),
+                        data.getEmail(),
+                        LocalDateTime.parse(data.getFechaRegistro()),
+                        data.getTipoEstado(),
+                        data.isEstado(),
+                        data.getUsuario()
+                )
+        );
+        return ClienteMapper.toResponse(cliente);
     }
 }
