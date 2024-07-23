@@ -1,6 +1,6 @@
 package com.quevedo.api.inmobiliaria_backend.presentation.dtos.cliente;
 
-import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;
+import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioDTO;
 
 public class ClienteCreateDTO {
     String nombre;
@@ -11,11 +11,11 @@ public class ClienteCreateDTO {
     String fechaRegistro;
     String tipoEstado;
     boolean estado;
-    Usuario usuario;
+    UsuarioDTO usuarioDTO;
 
     // constructor
 
-    public ClienteCreateDTO(String nombre, String apellido, String DNI, String telefono, String email, String fechaRegistro, String tipoEstado, boolean estado, Usuario usuario) {
+    public ClienteCreateDTO(String nombre, String apellido, String DNI, String telefono, String email, String fechaRegistro, String tipoEstado, boolean estado, UsuarioDTO usuarioDTO) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.DNI = DNI;
@@ -24,7 +24,7 @@ public class ClienteCreateDTO {
         this.fechaRegistro = fechaRegistro;
         this.tipoEstado = tipoEstado;
         this.estado = estado;
-        this.usuario = usuario;
+        this.usuarioDTO = usuarioDTO;
     }
 
     //getters and setters
@@ -93,11 +93,11 @@ public class ClienteCreateDTO {
         this.estado = estado;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+        this.usuarioDTO = usuarioDTO;
     }
 }

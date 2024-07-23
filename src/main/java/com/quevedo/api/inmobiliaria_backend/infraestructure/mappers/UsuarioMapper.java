@@ -5,6 +5,8 @@ import com.quevedo.api.inmobiliaria_backend.infraestructure.entities.UsuarioEnti
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.usuario.UsuarioUserDetailsDTO;
 
+import java.time.LocalDateTime;
+
 
 public class UsuarioMapper {
     public static Usuario fromEntity(UsuarioEntity entity) {
@@ -45,18 +47,18 @@ public class UsuarioMapper {
         );
     }
 
-    /*public static Usuario fromDtoToUsuario(UsuarioDTO dto) {
+    public static Usuario fromDtoToUsuario(UsuarioDTO dto) {
         return new Usuario(
                 dto.getIdUsuario(),
                 dto.getUsername(),
-                dto.getPassword(),
+                null,
                 dto.getRol(),
                 dto.getEquipoVenta(),
                 LocalDateTime.parse(dto.getFechaRegistro()),
                 dto.isEstado(),
                 EmpleadoMapper.fromDtoToEmpleado(dto.getEmpleadoDTO())
         );
-    }*/
+    }
 
     public static UsuarioUserDetailsDTO toUserDetails(Usuario usuario) {
         return new UsuarioUserDetailsDTO(

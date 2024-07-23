@@ -1,12 +1,10 @@
 package com.quevedo.api.inmobiliaria_backend.presentation.dtos.contrato;
 
-import com.quevedo.api.inmobiliaria_backend.presentation.dtos.empleado.EmpleadoDTO;
 
 public class ContratoCreateDTO {
     private String fechaInicio;
     private String fechaFin;
     private String tipoContrato;
-    private EmpleadoDTO empleadoDTO;
 
     // getters and setters
 
@@ -32,13 +30,5 @@ public class ContratoCreateDTO {
 
     public void setTipoContrato(String tipoContrato) {
         this.tipoContrato = tipoContrato;
-    }
-
-    public EmpleadoDTO getEmpleadoDTO() {
-        return empleadoDTO;
-    }
-
-    public void setEmpleadoDTO(EmpleadoDTO empleadoDTO) {
-        this.empleadoDTO = empleadoDTO;
     }
 }

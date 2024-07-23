@@ -1,6 +1,7 @@
 package com.quevedo.api.inmobiliaria_backend.presentation.controllers;
 
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.create.IClienteCreateUseCase;
+import com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.deleteById.IClienteDeleteByIdUseCase;
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.readAll.IClienteReadAllUseCase;
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.readById.IClienteReadByIdUseCase;
 import com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.update.IClienteUpdateUseCase;
@@ -22,12 +23,14 @@ public class ClienteController {
     private final IClienteUpdateUseCase clienteUpdateUseCase;
     private final IClienteReadAllUseCase clienteReadAllUseCase;
     private final IClienteReadByIdUseCase clienteReadByIdUseCase;
+    private final IClienteDeleteByIdUseCase clienteDeleteByIdUseCase;
 
-    public ClienteController(IClienteCreateUseCase clienteCreateUseCase, IClienteUpdateUseCase clienteUpdateUseCase, IClienteReadAllUseCase clienteReadAllUseCase, IClienteReadByIdUseCase clienteReadByIdUseCase) {
+    public ClienteController(IClienteCreateUseCase clienteCreateUseCase, IClienteUpdateUseCase clienteUpdateUseCase, IClienteReadAllUseCase clienteReadAllUseCase, IClienteReadByIdUseCase clienteReadByIdUseCase, IClienteDeleteByIdUseCase clienteDeleteByIdUseCase) {
         this.clienteCreateUseCase = clienteCreateUseCase;
         this.clienteUpdateUseCase = clienteUpdateUseCase;
         this.clienteReadAllUseCase = clienteReadAllUseCase;
         this.clienteReadByIdUseCase = clienteReadByIdUseCase;
+        this.clienteDeleteByIdUseCase = clienteDeleteByIdUseCase;
     }
 
     @GetMapping
@@ -48,5 +51,11 @@ public class ClienteController {
     @PutMapping(value = "/{idCliente}")
     public ResponseEntity<ResponseDTO<ClienteDTO>> update(@PathVariable int idCliente, @RequestBody ClienteDTO clienteDTO) {
         return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, clienteUpdateUseCase.execute(idCliente, clienteDTO)));
+    }
+
+    @DeleteMapping(value = "/{idCliente}")
+    public ResponseEntity<ResponseDTO<Void>> delete(@PathVariable int idCliente) {
+        clienteDeleteByIdUseCase.execute(idCliente);
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.NO_CONTENT));
     }
 }

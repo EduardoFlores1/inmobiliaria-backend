@@ -34,8 +34,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> readAll() {
-        return ResponseEntity.ok(usuarioReadAllUseCase.execute());
+    public ResponseEntity<ResponseDTO<List<UsuarioDTO>>> readAll() {
+        return ResponseEntity.ok(ResponseDTO.of(HttpStatus.OK, usuarioReadAllUseCase.execute()));
     }
 
     @GetMapping(value = "/{idUsuario}")

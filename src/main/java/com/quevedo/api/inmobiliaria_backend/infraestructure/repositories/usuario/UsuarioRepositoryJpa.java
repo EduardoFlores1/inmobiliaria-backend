@@ -53,4 +53,5 @@ public class UsuarioRepositoryJpa implements IUsuarioRepository {
         return usuarioRepositoryJpa.findByUsername(username)
                 .map(UsuarioMapper::fromEntity);
     }
+
 }

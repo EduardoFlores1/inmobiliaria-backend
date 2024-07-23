@@ -26,7 +26,7 @@ public class UsuarioDeleteByIdUseCase implements IUsuarioDeleteByIdUseCase {
             // logic delete usuario
             opt.get().setEstado(false);
             usuarioRepository.save(opt.get());
-
+            return;
         }
         throw new EntityNotFoundException();
     }

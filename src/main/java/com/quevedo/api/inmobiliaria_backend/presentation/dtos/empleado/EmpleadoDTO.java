@@ -16,7 +16,6 @@ public class EmpleadoDTO {
     private ContratoDTO contratoDTO;
 
     // constructor
-
     public EmpleadoDTO(Integer idEmpleado, String nombre, String apellido, String email, String DNI, String telefono, String direccion, String fechaContratacion, String cargo, boolean estado, ContratoDTO contratoDTO) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;

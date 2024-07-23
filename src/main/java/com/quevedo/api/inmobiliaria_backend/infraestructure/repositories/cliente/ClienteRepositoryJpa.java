@@ -39,4 +39,10 @@ public class ClienteRepositoryJpa implements IClienteRepository {
     public void delete(int id) {
         clienteRepositoryJpa.deleteById(id);
     }
+
+    @Override
+    public List<Cliente> findAllByEstado(boolean estado) {
+        return clienteRepositoryJpa.findAllByEstado(estado).stream()
+                .map(ClienteMapper::fromEntity).toList();
+    }
 }

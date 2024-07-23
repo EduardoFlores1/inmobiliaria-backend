@@ -1,4 +1,4 @@
-package com.quevedo.api.inmobiliaria_backend.aplication.usecases.login;
+package com.quevedo.api.inmobiliaria_backend.aplication.usecases.auth.login;
 
 import com.quevedo.api.inmobiliaria_backend.aplication.services.auth.IJwtService;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Usuario;

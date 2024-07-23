@@ -34,9 +34,9 @@ public class HttpSecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(authConfig -> {
                     // public
-                    authConfig.requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll();
+                    authConfig.requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll();
                     // private
-                    authConfig.requestMatchers(HttpMethod.GET, "/api/v1/empleados").hasRole("ADMINISTRADOR");
+                    //authConfig.requestMatchers(HttpMethod.GET, "/api/v1/empleados").hasRole("ADMINISTRADOR");
                     authConfig.anyRequest().authenticated();
                 })
                 .exceptionHandling(customizer -> customizer.authenticationEntryPoint(authenticationEntryPoint()))

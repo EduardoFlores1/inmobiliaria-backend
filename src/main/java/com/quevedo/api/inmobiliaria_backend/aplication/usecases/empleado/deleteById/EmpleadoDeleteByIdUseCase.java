@@ -29,7 +29,6 @@ public class EmpleadoDeleteByIdUseCase implements IEmpleadoDeleteByIdUseCase {
         if (optEmpleado.isPresent()) {
             // if empleado has usuario
             Optional<Usuario> optUsuario = usuarioRepository.buscarUsuarioEstadoTrue(id);
-
             // logic delete
             optUsuario.ifPresent(usuario -> {
                 usuario.setEstado(false);
@@ -38,7 +37,7 @@ public class EmpleadoDeleteByIdUseCase implements IEmpleadoDeleteByIdUseCase {
             // logic delete empleado
             optEmpleado.get().setEstado(false);
             empleadoRepository.save(optEmpleado.get());
-
+            return;
         }
         throw new EntityNotFoundException();
     }

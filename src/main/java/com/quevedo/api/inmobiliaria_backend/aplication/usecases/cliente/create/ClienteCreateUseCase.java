@@ -3,6 +3,7 @@ package com.quevedo.api.inmobiliaria_backend.aplication.usecases.cliente.create;
 import com.quevedo.api.inmobiliaria_backend.domain.models.Cliente;
 import com.quevedo.api.inmobiliaria_backend.domain.repositories.IClienteRepository;
 import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.ClienteMapper;
+import com.quevedo.api.inmobiliaria_backend.infraestructure.mappers.UsuarioMapper;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.cliente.ClienteCreateDTO;
 import com.quevedo.api.inmobiliaria_backend.presentation.dtos.cliente.ClienteDTO;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class ClienteCreateUseCase implements IClienteCreateUseCase {
                         LocalDateTime.parse(data.getFechaRegistro()),
                         data.getTipoEstado(),
                         data.isEstado(),
-                        data.getUsuario()
+                        UsuarioMapper.fromDtoToUsuario(data.getUsuarioDTO())
                 )
         );
         return ClienteMapper.toResponse(cliente);
